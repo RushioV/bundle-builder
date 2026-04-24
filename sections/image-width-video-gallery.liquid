@@ -1,0 +1,389 @@
+<div class="ctm_videogallery_main section">
+  <div class="ctm_video_info_block">
+    {% if section.settings.heading != blank %}
+      <div class="ctm_video_infotitle">
+        <h2>{{ section.settings.heading }}</h2>
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="swiper ctm_video_gallery_slider">
+    <div class="swiper-wrapper">
+      {% for block in section.blocks %}
+        <div class="swiper-slide">
+          <div class="video-image-block">
+            {% if block.settings.video != blank %}
+              <!-- Display video -->
+              <div class="video_rapper">
+                {% assign poster = block.settings.poster_video | img_url: 'master' %}
+                {% assign video_id = 'video-' | append: forloop.index %}
+
+                {{ block.settings.video 
+                  | video_tag: 
+                    autoplay: false, 
+                    loop: true, 
+                    muted: false, 
+                    playsinline: true, 
+                    webkit-playsinline: true, 
+                    controls: false, 
+                    image_size: '400x', 
+                    poster: poster, 
+                    id: video_id
+                }}
+                <div class="play-button">
+                  <button class="video-play-button" type="button" data-video-id="video-{{ forloop.index }}" {{ block.shopify_attributes }}>
+                    <svg role="presentation" fill="none" focusable="false" width="48" height="48" class="icon icon-play-button" viewBox="0 0 48 48">
+                      <path fill-rule="evenodd" clip-rule="evenodd" d="M24 48C10.745 48 0 37.255 0 24S10.745 0 24 0s24 10.745 24 24-10.745 24-24 24Zm-3-19.15a.3.3 0 0 0 .462.253l7.545-4.85a.3.3 0 0 0 0-.505l-7.545-4.85a.3.3 0 0 0-.462.252v9.7Z" fill="currentColor"></path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            {% endif %}
+
+             {% if block.settings.image != blank %}
+              <div class="ctm_video_image">
+                <div class="video_rapper">
+                  <img src="{{ block.settings.image | img_url: "master" }}" alt="Gallery Image" width="1080" height="1080" loading="lazy">
+                </div>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+     <div class="swiper-pagination"></div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+  </div>
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<style>
+  .video-image-block {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+  .video_rapper, .ctm_video_image {
+    flex: 1;
+  }
+  .ctm_video_image img {
+    width:100%;
+    height:100%;
+    object-fit:cover;
+  }
+  .ctm_videogallery_main .swiper-button-next, .ctm_videogallery_main .swiper-button-prev {
+    display: flex;
+    background: #fff;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    border-radius:40px;
+  }
+  .ctm_videogallery_main .swiper-button-next:after, .ctm_videogallery_main .swiper-button-prev:after {
+    font-size: 20px;
+    color:#000;
+  }
+  .ctm_videogallery_main .swiper-button-prev:after {
+    margin-left: -8px;
+    font-weight:bold;
+  }
+  .ctm_videogallery_main .swiper-button-next:after {
+    margin-right: -8px;
+    font-weight:bold;
+  }
+  .ctm_videogallery_main {
+    padding-block:100px;
+    padding-right:0px !important;
+  }
+  .ctm_videogallery_main
+  .video_rapper {
+    position:relative;
+    border-radius: 10px;
+    overflow: hidden;
+      padding-bottom:70%;
+  }
+  .video_rapper video, .video_rapper img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+  .ctm_video_info_block {
+    display: flex;
+    align-items: center;
+    padding-bottom: 25px;
+}
+  .ctm_video_infotitle h2 {
+    font-size: 48px;
+    color: #837CBB;
+    margin-right: 40px;
+}
+  .video-play-button {
+    background:transparent;
+    border:none;
+    padding:0px;
+    cursor:pointer;
+  }
+  .video-play-button:before {
+    background: #fff;
+}
+  .video-play-button svg {
+    width: 44px;
+    height: 44px;
+    color:#fff;
+}
+.ctm_videogallery_main .swiper-pagination  {
+  bottom:0px;
+}
+.ctm_videogallery_main .swiper-wrapper {
+  padding-bottom:50px;
+}
+.ctm_videogallery_main .swiper-pagination-bullet {
+  width: 15px;
+  height: 4px;
+  border-radius:0px;
+}
+
+  @media screen and (max-width:1366px) {
+    .ctm_videogallery_main {
+      padding-block: 60px;
+    }
+  }
+  @media screen and (max-width:767px) {
+    .ctm_videogallery_main {
+      padding-top: 32px;
+    }
+    .ctm_video_infotitle h2 {
+      font-size: 36px;
+      color: #020202;
+      margin-right: 0;
+    }
+    .ctm_video_info_block {
+      display: block;
+      text-align: center;
+    }
+  }
+@media screen and (max-width:575px) {
+  .ctm_video_gallery_slider.swiper {
+    padding-bottom: 32px !important;
+  }
+  .ctm_video_gallery_slider .swiper-scrollbar {
+        background: #7D62A933;
+        max-width: calc(100% - 40px);
+        width: 100% !important;
+        margin: 0 auto;
+        left: 20px;
+        right: 20px;
+        bottom: 0px;
+  }
+  .ctm_video_gallery_slider .swiper-scrollbar-drag {
+    background:#7D62A9;
+  }
+}
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const playButtons = document.querySelectorAll('.video-play-button');
+  const videos = document.querySelectorAll('video');
+
+  // Handle play button clicks
+  playButtons.forEach(button => {
+    button.addEventListener('click', function () {
+      // Pause all videos
+      videos.forEach(video => {
+        video.pause();
+        video.closest('.video_rapper').querySelector('.video-play-button').style.display = 'block'; // Show play button for all videos
+      });
+
+      // Get the related video
+      const videoId = this.getAttribute('data-video-id');
+      const relatedVideo = document.querySelector(`#${videoId}`);
+
+      if (relatedVideo) {
+        // Play the related video
+        relatedVideo.play();
+        // Hide the play button for the related video
+        this.style.display = 'none';
+      }
+    });
+  });
+
+  // Handle video play/pause events
+  videos.forEach(video => {
+    // When the video is clicked, toggle play/pause
+    video.addEventListener('click', function () {
+      if (this.paused) {
+        this.play();
+        this.closest('.video_rapper').querySelector('.video-play-button').style.display = 'none';
+      } else {
+        this.pause();
+        this.closest('.video_rapper').querySelector('.video-play-button').style.display = 'block';
+      }
+    });
+
+    // When the video ends, show the play button again
+    video.addEventListener('ended', function () {
+      this.closest('.video_rapper').querySelector('.video-play-button').style.display = 'block';
+    });
+  });
+
+  // Swiper slider initialization
+  var swiper = new Swiper(".ctm_video_gallery_slider", {
+    slidesPerView:4.2,
+    loop: true,
+    centeredSlides: true,
+    centeredSlidesBounds: true,
+    spaceBetween: 32,
+    slidesOffsetAfter: 0,
+    slidesOffsetBefore: 0,
+    //setWrapperSize: true,
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+     pagination: {
+        el: ".swiper-pagination",
+        clickable: true
+    },
+     breakpoints: {
+      1440: {
+        slidesPerView: 3.5,
+        spaceBetween: 32,
+        slidesOffsetAfter: 0,
+        slidesOffsetBefore: 0,
+      },
+      1280: {
+        slidesPerView: 4.2,
+        spaceBetween: 32,
+        slidesOffsetAfter: 0,
+        slidesOffsetBefore: 0,
+      },
+      1024: {
+        slidesPerView: 3.5,
+        spaceBetween: 20,
+        slidesOffsetAfter: 0,
+        slidesOffsetBefore: 0,
+      },
+      768: {
+        slidesPerView: 3.5,
+        spaceBetween: 20,
+        slidesOffsetAfter: 0,
+        slidesOffsetBefore: 0,
+
+      },
+      576: {
+        slidesPerView: 3.5,
+        spaceBetween: 20,
+        slidesOffsetAfter: 20,
+        slidesOffsetBefore: 0,
+      },
+      414: {
+        slidesPerView: 2.5,
+        spaceBetween: 20,
+        slidesOffsetAfter: 20,
+        slidesOffsetBefore: 0,
+      },
+      375: {
+        slidesPerView: 1.5,
+        spaceBetween: 20,
+        slidesOffsetAfter: 20,
+        slidesOffsetBefore: 0,
+      },
+      320: {
+        slidesPerView: 1.5,
+        spaceBetween: 20,
+        slidesOffsetAfter: 20,
+        slidesOffsetBefore: 0,
+      },
+    },
+    on: {
+      slideChange: function () {
+        // Pause all videos on slide change
+        videos.forEach(video => {
+          video.pause();
+          video.closest('.video_rapper').querySelector('.video-play-button').style.display = 'block'; // Show play button
+        });
+      },
+    },
+   
+  });
+});
+
+</script>
+
+{% schema %}
+{
+  "name": "Custom Video Gallery",
+  "tag": "section",
+  "class": "ctm_videogallery_section",
+  "settings": [
+    {
+      "type": "text",
+      "label": "Heading",
+      "id": "heading"
+    },
+    {
+      "type": "image_picker",
+      "label": "Image ",
+      "id": "image"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "video",
+      "name": "Video",
+      "settings": [
+        {
+          "type": "video",
+          "label": "Video",
+          "id": "video"
+        },
+        {
+          "type": "image_picker",
+          "label": "Poster Image",
+          "id": "poster_video"
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "label": "Image",
+          "id": "image"
+        }
+      ]
+    },
+    
+  ],
+  "presets": [
+    {
+      "name": "Custom Video Gallery",
+        "blocks": [
+        {
+          "type": "video",
+        },
+        {
+          "type": "image",
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+

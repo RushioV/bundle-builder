@@ -1,0 +1,346 @@
+<div class="faq-section">
+  <div class="faq-section__container">
+    <h2 class="faq-section__title">{{ section.settings.faq_section_title }}</h2>
+
+    <div class="tlt_and_btn">
+        <h2 class="tlt">{{ section.settings.faq_section_title }}</h2>
+        <a href="{{ section.settings.button_link }}" class="button btn button--primary"> {{  section.settings.button_lable}} </a>
+    </div>
+
+    <div class="faq-section__content">
+        {% for block in section.blocks %}
+            <div
+            class="faq-item {% if forloop.first %} faq-item--active{% endif %}"
+            role="button"
+            tabindex="0"
+            aria-expanded="false"
+            aria-controls="faq-answer-{{ block.id }}"
+            aria-label="FAQ: {{ block.settings.question }}"
+            >
+            <button
+                class="faq-item__question{% if forloop.first %} faq-item__question--active{% endif %}"
+                type="button"
+                aria-expanded="false"
+                aria-controls="faq-answer-{{ block.id }}"
+                aria-label="Question: {{ block.settings.question }}"
+                data-faq-toggle=""
+                tabindex="-1"
+            >
+                <span class="faq-item__question-text">{{ block.settings.question }}</span>
+            </button>
+            <div
+                class="faq-item__answer{% if forloop.first %} faq-item__answer--active{% endif %}"
+                id="faq-answer-{{ block.id }}"
+                role="region"
+                aria-hidden="true"
+                aria-labelledby="faq-question-{{ block.id }}"
+            >
+                <div class="faq-item__answer-content">
+                {{ block.settings.answer }}
+                <span class="faq-item__question-number" aria-hidden="true">{{ block.settings.answer_no }}</span>
+                </div>
+            </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <a href="{{ section.settings.button_link }}" class="button btn button--primary btn--mobile"> {{  section.settings.button_lable}} </a>
+
+  </div>
+</div>
+
+<style>
+    .faq-section{
+        padding:var(--faq-section-padding-top-desktop, 55px) 30px var(--faq-section-padding-bottom-desktop, 55px);
+        background-color:#e9f0ff;
+    }
+    .faq-section__container{
+        display:flex;
+        flex-direction:column;
+        max-width:1380px;
+        margin:0 auto
+    }
+    .faq-section__title{
+        font-weight:500;
+        margin-bottom:50px;
+        text-align:center;
+        line-height:26px;
+        display:none;
+    }
+    .tlt_and_btn{
+        display:flex;
+        justify-content:space-between;
+        gap:20px;
+        margin-bottom:30px;
+        align-items:center
+    }
+    .tlt_and_btn .tlt{
+        font-weight:500;
+        font-size:26px;
+        line-height:120%;
+        letter-spacing:0;
+        margin:0
+    }
+    .tlt_and_btn .btn{
+        font-weight:700;
+        font-size:18px;
+        line-height:100%;
+        letter-spacing:0;
+        min-width:max-content
+    }
+    .faq-section__content{
+        display:flex;
+        flex-wrap:wrap;
+        gap:15px
+    }
+    .faq-item{
+        width:calc((100% / 3) - 10px);
+        padding:15px 22px 15px 15px;
+        background:#fff;
+        border-radius:10px;
+        min-height:187px;
+        display:flex;
+        flex-direction:column;
+        transition:all .3s ease;
+        cursor:pointer
+    }
+    .faq-item__question{
+        padding:0;
+        border:none;
+        background:transparent;
+        display:flex;
+        cursor:pointer;
+        width:100%
+    }
+    .faq-item__question-number{
+        font-weight:500;
+        font-size:12px;
+        line-height:100%;
+        text-transform:uppercase;
+        color:#2e2e24;
+        position:absolute;
+        width:100%;
+        height:100%;
+        display:flex;
+        align-items:flex-end;
+        justify-content:flex-start;
+        top:0;
+        left:0;
+        opacity:1;
+        visibility:visible;
+        pointer-events:all;
+        transition:all .3s ease
+    }
+    .faq-item__question-text{
+        font-weight:400;
+        font-size:26px;
+        line-height:31px;
+        letter-spacing:-.4px;
+        text-align:left;
+        color:#2e2e24
+    }
+    .faq-item__answer{
+        margin-top:auto;
+        position:relative
+    }
+    .faq-item__answer-content{
+        font-weight:400;
+        line-height:120%;
+        color:#2e2e24
+    }
+    .faq-item__answer-content p{
+        font-size:14px;
+        font-weight:400;
+        line-height:120%;
+        color:#2e2e24;
+        opacity:0;
+        visibility:hidden;
+        pointer-events:none;
+        transition:all .3s ease;
+        margin:0
+    }
+    .faq-item--active .faq-item__question-number{
+        opacity:0;
+        visibility:hidden;
+        pointer-events:none
+    }
+    .faq-item--active .faq-item__question-text,.faq-item--active .faq-item__answer,.faq-item--active .faq-item__answer-content p{
+        opacity:1;
+        visibility:visible;
+        pointer-events:all
+    }
+    .faq-item.faq-item--active{
+        background-color: #043085;
+    }
+    .faq-item.faq-item--active .faq-item__question-text, .faq-item.faq-item--active .faq-item__answer-content p {
+        color:#fff;
+    }
+    .btn--mobile{
+        display:none
+    }
+    @media (max-width: 990px){
+        .faq-item{
+            width:calc(50% - 8px)
+        }
+    }
+    @media (max-width: 767px){
+        .faq-section{
+            padding:var(--faq-section-padding-top-mobile, 45px) 15px var(--faq-section-padding-bottom-mobile, 45px)
+        }
+        .faq-section__title{
+            margin-bottom:30px
+        }
+        .faq-section__content{
+            flex-direction:column
+        }
+        .faq-item{
+            width:100%;
+            padding:15px;
+            min-height:auto
+        }
+        .faq-item__question-text{
+            font-size:18px;
+            line-height:20px
+        }
+        .faq-item__question-number{
+            display:none
+        }
+        .faq-item__answer-content{
+            padding-top:20px;
+            opacity:0;
+            visibility:hidden;
+            pointer-events:none;
+            transition:all .3s ease
+        }
+        .faq-item__answer{
+            max-height:0;
+            transition:max-height .3s ease
+        }
+        .faq-item--active .faq-item__answer{
+            max-height:500px
+        }
+        .faq-item--active .faq-item__answer-content{
+            opacity:1;
+            visibility:visible;
+            pointer-events:all
+        }
+        .faq-item__answer-content p{
+            font-size:12px;
+            line-height:14.5px
+        }
+        .tlt_and_btn{
+            margin-bottom:12px
+        }
+        .tlt_and_btn .tlt{
+            font-size:18px
+        }
+        .tlt_and_btn .btn{
+            display:none
+        }
+        .btn--mobile{
+            display:flex;
+            margin-top:20px;
+            min-width:100%
+        }
+    }
+
+
+</style>
+
+<script>
+    (function() {
+        if (window.faqSectionInitialized) return;
+        window.faqSectionInitialized = !0;
+
+        function initializeFAQSection() {
+            document.querySelectorAll(".faq-section").forEach(section => {
+                if (section.dataset.faqInitialized) return;
+                section.dataset.faqInitialized = "true";
+                const faqItems = section.querySelectorAll(".faq-item");
+
+                function toggleFAQItem(faqItem, forceClose = !1) {
+                    const questionButton = faqItem.querySelector("[data-faq-toggle]"),
+                        answer = faqItem.querySelector(".faq-item__answer");
+                    if (!questionButton || !answer) return;
+                    const isExpanded = questionButton.getAttribute("aria-expanded") === "true",
+                        shouldClose = forceClose || isExpanded;
+                    shouldClose || faqItems.forEach(otherItem => {
+                        otherItem !== faqItem && toggleFAQItem(otherItem, !0)
+                    }), questionButton.setAttribute("aria-expanded", !shouldClose), answer.setAttribute("aria-hidden", shouldClose), shouldClose ? (questionButton.classList.remove("faq-item__question--active"), answer.classList.remove("faq-item__answer--active"), faqItem.classList.remove("faq-item--active")) : (questionButton.classList.add("faq-item__question--active"), answer.classList.add("faq-item__answer--active"), faqItem.classList.add("faq-item--active"))
+                }
+                faqItems.forEach(faqItem => {
+                    faqItem.addEventListener("click", function(e) {
+                        e.preventDefault(), toggleFAQItem(this)
+                    }), faqItem.addEventListener("keydown", function(e) {
+                        (e.key === "Enter" || e.key === " ") && (e.preventDefault(), toggleFAQItem(this))
+                    }), faqItem.hasAttribute("tabindex") || faqItem.setAttribute("tabindex", "0")
+                })
+            })
+        }
+        document.readyState === "loading" ? document.addEventListener("DOMContentLoaded", initializeFAQSection) : initializeFAQSection()
+    })();
+
+</script>
+
+
+
+{% schema %}
+{
+  "name": "FAQ Section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "FAQ Section Settings"
+    },
+    {
+      "type": "text",
+      "label": "Section Title",
+      "id": "faq_section_title",
+      "default": "Frequently Asked Questions",
+      "info": "This title will be displayed at the top of the FAQ section."
+    },
+    {
+      "type": "richtext",
+      "label": "Button Label",
+      "id": "button_lable",
+    },
+    {
+      "type": "url",
+      "label": "Link",
+      "id": "button_link",
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq_item_block",
+      "name": "FAQ Item",
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "label": "Question",
+          "id": "question",
+          "default": "What makes Mānuka honey different from regular honey?",
+          "info": "The question you want to display for this FAQ item."
+        },
+        {
+          "type": "richtext",
+          "label": "Answer",
+          "id": "answer",
+          "info": "The answer to the FAQ question."
+        },
+        {
+          "type": "text",
+          "label": "Answer No",
+          "id": "answer_no",
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ Section",
+    }
+  ]
+}
+{% endschema %}
+

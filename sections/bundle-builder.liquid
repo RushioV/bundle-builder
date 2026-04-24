@@ -1,0 +1,432 @@
+{% liquid
+  assign total_steps = 3
+  if section.settings.enable_extras
+    assign total_steps = 4
+  endif
+%}
+
+{{ 'bundle-builder.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'bundle-builder.js' | asset_url }}" defer></script>
+
+<section
+  class="bundle-builder-section color-{{ section.settings.color_scheme }}"
+  data-bundle-section="{{ section.id }}"
+  data-section-id="{{ section.id }}"
+  data-products-per-step="{{ section.settings.products_per_step }}"
+  data-enable-extras="{{ section.settings.enable_extras }}"
+  data-enable-mobile-sticky="{{ section.settings.enable_mobile_sticky }}"
+  data-shirt-collection="{% if section.settings.shirt_collection %}{{ section.settings.shirt_collection.handle }}{% endif %}"
+  data-accessory-collection="{% if section.settings.accessory_collection %}{{ section.settings.accessory_collection.handle }}{% endif %}"
+  data-extra-collection="{% if section.settings.extra_collection %}{{ section.settings.extra_collection.handle }}{% endif %}"
+  data-step-1-heading="{{ section.settings.step1_heading | escape }}"
+  data-step-1-description="{{ section.settings.step1_description | escape }}"
+  data-step-2-heading="{{ section.settings.step2_heading | escape }}"
+  data-step-2-description="{{ section.settings.step2_description | escape }}"
+  data-step-3-heading="{{ section.settings.step3_heading | escape }}"
+  data-step-3-description="{{ section.settings.step3_description | escape }}"
+  data-step-4-heading="{{ section.settings.step4_heading | escape }}"
+  data-step-4-description="{{ section.settings.step4_description | escape }}"
+  data-tier-1-threshold="{{ section.settings.discount_tier1_items }}"
+  data-tier-1-percent="{{ section.settings.discount_tier1_percent }}"
+  data-tier-2-threshold="{{ section.settings.discount_tier2_items }}"
+  data-tier-2-percent="{{ section.settings.discount_tier2_percent }}"
+  data-tier-3-threshold="{{ section.settings.discount_tier3_items }}"
+  data-tier-3-percent="{{ section.settings.discount_tier3_percent }}"
+  style="
+    --bundle-accent-color: {{ section.settings.accent_color }};
+    --bundle-surface-color: {{ section.settings.background_color }};
+  "
+>
+  <div class="bundle-builder__shell page-width">
+    <div class="bundle-builder__hero">
+      <p class="bundle-builder__eyebrow">Build Your Own Bundle</p>
+      <h1 class="bundle-builder__title">{{ section.settings.hero_heading }}</h1>
+      <p class="bundle-builder__lede">{{ section.settings.hero_text }}</p>
+    </div>
+
+    <div class="bundle-builder__live-region visually-hidden" aria-live="polite" data-live-region></div>
+    <div class="bundle-builder__feedback" data-error-message hidden></div>
+
+    <div class="bundle-builder__progress" aria-label="Bundle progress">
+      <div class="bundle-builder__progress-bar" aria-hidden="true">
+        <span class="bundle-builder__progress-fill" data-progress-fill></span>
+      </div>
+      <div class="bundle-builder__progress-steps" data-progress-steps style="--bundle-progress-columns: {{ total_steps }};">
+        <button type="button" class="bundle-builder__progress-step is-active" data-progress-step="1">
+          <span class="bundle-builder__progress-index">1</span>
+          <span class="bundle-builder__progress-copy">Shirt</span>
+        </button>
+        <button type="button" class="bundle-builder__progress-step" data-progress-step="2">
+          <span class="bundle-builder__progress-index">2</span>
+          <span class="bundle-builder__progress-copy">Accessory</span>
+        </button>
+        {% if section.settings.enable_extras %}
+          <button type="button" class="bundle-builder__progress-step" data-progress-step="3">
+            <span class="bundle-builder__progress-index">3</span>
+            <span class="bundle-builder__progress-copy">Extras</span>
+          </button>
+          <button type="button" class="bundle-builder__progress-step" data-progress-step="4">
+            <span class="bundle-builder__progress-index">4</span>
+            <span class="bundle-builder__progress-copy">Review</span>
+          </button>
+        {% else %}
+          <button type="button" class="bundle-builder__progress-step" data-progress-step="3">
+            <span class="bundle-builder__progress-index">3</span>
+            <span class="bundle-builder__progress-copy">Review</span>
+          </button>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="bundle-builder__layout">
+      <div class="bundle-builder__main">
+        <header class="bundle-builder__step-header">
+          <p class="bundle-builder__step-kicker" data-current-step-label>
+            Step 1 of {{ total_steps }}
+          </p>
+          <h2 class="bundle-builder__step-title" tabindex="-1" data-step-heading>
+            {{ section.settings.step1_heading }}
+          </h2>
+          <p class="bundle-builder__step-description" data-step-description>
+            {{ section.settings.step1_description }}
+          </p>
+        </header>
+
+        <div class="bundle-builder__panels" data-step-panels>
+          <section
+            class="bundle-builder__panel is-active"
+            id="BundleStep-{{ section.id }}-1"
+            data-step-panel="1"
+            aria-labelledby="BundleStepTitle-{{ section.id }}"
+          >
+            <div class="bundle-builder__grid" data-products-grid="shirt"></div>
+          </section>
+
+          <section
+            class="bundle-builder__panel"
+            id="BundleStep-{{ section.id }}-2"
+            data-step-panel="2"
+            aria-labelledby="BundleStepTitle-{{ section.id }}"
+            hidden
+          >
+            <div class="bundle-builder__grid" data-products-grid="accessory"></div>
+          </section>
+
+          {% if section.settings.enable_extras %}
+            <section
+              class="bundle-builder__panel"
+              id="BundleStep-{{ section.id }}-3"
+              data-step-panel="3"
+              aria-labelledby="BundleStepTitle-{{ section.id }}"
+              hidden
+            >
+              <div class="bundle-builder__grid" data-products-grid="extra"></div>
+            </section>
+
+            <section
+              class="bundle-builder__panel"
+              id="BundleStep-{{ section.id }}-4"
+              data-step-panel="4"
+              aria-labelledby="BundleStepTitle-{{ section.id }}"
+              hidden
+            >
+              <div class="bundle-builder__review" data-review-panel></div>
+            </section>
+          {% else %}
+            <section
+              class="bundle-builder__panel"
+              id="BundleStep-{{ section.id }}-3"
+              data-step-panel="3"
+              aria-labelledby="BundleStepTitle-{{ section.id }}"
+              hidden
+            >
+              <div class="bundle-builder__review" data-review-panel></div>
+            </section>
+          {% endif %}
+        </div>
+
+        <div class="bundle-builder__actions">
+          <button type="button" class="bundle-builder__button bundle-builder__button--ghost" data-prev-step>
+            Back
+          </button>
+          <button type="button" class="bundle-builder__button bundle-builder__button--primary" data-next-step>
+            Continue
+          </button>
+          <button type="button" class="bundle-builder__button bundle-builder__button--primary" data-add-to-cart hidden>
+            <span>Add Bundle to Cart</span>
+          </button>
+        </div>
+      </div>
+
+      <aside class="bundle-builder__sidebar" data-pricing-sidebar aria-label="Bundle pricing summary"></aside>
+    </div>
+
+    <section class="bundle-builder__confirmation" data-confirmation hidden>
+      <div class="bundle-builder__confirmation-card">
+        <button type="button" class="bundle-builder__confirmation-close" data-confirmation-close aria-label="Close confirmation">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <p class="bundle-builder__eyebrow">Bundle Added</p>
+        <h2 class="bundle-builder__step-title">Your bundle is ready</h2>
+        <p class="bundle-builder__lede">
+          Everything was added to cart in one request. Review the bundle below or head straight to checkout.
+        </p>
+        <div data-confirmation-summary></div>
+        <div class="bundle-builder__confirmation-actions">
+          <button type="button" class="bundle-builder__button bundle-builder__button--ghost" data-confirmation-reset>
+            Continue Shopping
+          </button>
+          <a class="bundle-builder__button bundle-builder__button--primary" href="/cart">
+            Go to Cart
+          </a>
+          <a class="bundle-builder__button bundle-builder__button--primary" href="/checkout">
+            Go to Checkout
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  {% if section.settings.enable_mobile_sticky %}
+    <div class="bundle-builder__mobile-bar" data-mobile-summary>
+      <button
+        type="button"
+        class="bundle-builder__mobile-trigger"
+        data-mobile-toggle
+        aria-expanded="false"
+        aria-controls="BundleMobileDrawer-{{ section.id }}"
+      >
+        <span data-mobile-trigger-copy>0 items selected</span>
+        <strong data-mobile-trigger-total>{{ 0 | money }}</strong>
+      </button>
+    </div>
+
+    <div class="bundle-builder__mobile-overlay" data-mobile-overlay hidden></div>
+    <div
+      class="bundle-builder__mobile-drawer"
+      id="BundleMobileDrawer-{{ section.id }}"
+      data-mobile-drawer
+      hidden
+    >
+      <div class="bundle-builder__mobile-drawer-header">
+        <p>Bundle summary</p>
+        <button type="button" class="bundle-builder__mobile-close" data-mobile-close aria-label="Close summary">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div data-mobile-pricing-panel></div>
+    </div>
+  {% endif %}
+
+  <div class="bundle-builder__loading" data-loading hidden>
+    <div class="bundle-builder__spinner" aria-hidden="true"></div>
+    <p>Loading products...</p>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Bundle Builder",
+  "tag": "section",
+  "class": "section section-bundle-builder",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Intro"
+    },
+    {
+      "type": "text",
+      "id": "hero_heading",
+      "label": "Hero heading",
+      "default": "Build the set that fits your style"
+    },
+    {
+      "type": "textarea",
+      "id": "hero_text",
+      "label": "Hero text",
+      "default": "Pick a shirt, match it with an accessory, and unlock better bundle pricing as you add more."
+    },
+    {
+      "type": "header",
+      "content": "Collections"
+    },
+    {
+      "type": "collection",
+      "id": "shirt_collection",
+      "label": "Shirt collection"
+    },
+    {
+      "type": "collection",
+      "id": "accessory_collection",
+      "label": "Accessory collection"
+    },
+    {
+      "type": "collection",
+      "id": "extra_collection",
+      "label": "Extras collection"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "products_per_step",
+      "label": "Products per step",
+      "min": 4,
+      "max": 12,
+      "step": 1,
+      "default": 6
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_extras",
+      "label": "Enable extras step",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_mobile_sticky",
+      "label": "Enable sticky pricing bar on mobile",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Step content"
+    },
+    {
+      "type": "text",
+      "id": "step1_heading",
+      "label": "Step 1 heading",
+      "default": "Choose your shirt"
+    },
+    {
+      "type": "textarea",
+      "id": "step1_description",
+      "label": "Step 1 description",
+      "default": "Select one shirt and confirm the size before moving forward."
+    },
+    {
+      "type": "text",
+      "id": "step2_heading",
+      "label": "Step 2 heading",
+      "default": "Choose your accessory"
+    },
+    {
+      "type": "textarea",
+      "id": "step2_description",
+      "label": "Step 2 description",
+      "default": "Pair your shirt with one accessory to complete the base bundle."
+    },
+    {
+      "type": "text",
+      "id": "step3_heading",
+      "label": "Step 3 heading",
+      "default": "Add extras"
+    },
+    {
+      "type": "textarea",
+      "id": "step3_description",
+      "label": "Step 3 description",
+      "default": "Extras are optional, but they can unlock a better discount tier."
+    },
+    {
+      "type": "text",
+      "id": "step4_heading",
+      "label": "Review heading",
+      "default": "Review your bundle"
+    },
+    {
+      "type": "textarea",
+      "id": "step4_description",
+      "label": "Review description",
+      "default": "Double-check your selections, pricing, and discount before adding everything to cart."
+    },
+    {
+      "type": "header",
+      "content": "Discount tiers"
+    },
+    {
+      "type": "range",
+      "id": "discount_tier1_items",
+      "label": "Tier 1 minimum items",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "discount_tier1_percent",
+      "label": "Tier 1 discount percent",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "discount_tier2_items",
+      "label": "Tier 2 minimum items",
+      "min": 3,
+      "max": 8,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "discount_tier2_percent",
+      "label": "Tier 2 discount percent",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "discount_tier3_items",
+      "label": "Tier 3 minimum items",
+      "min": 4,
+      "max": 10,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "range",
+      "id": "discount_tier3_percent",
+      "label": "Tier 3 discount percent",
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Surface color",
+      "default": "#f6efe6"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color",
+      "default": "#1d3b31"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bundle Builder"
+    }
+  ]
+}
+{% endschema %}

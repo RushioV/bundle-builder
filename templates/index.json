@@ -1,0 +1,395 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "image_banner": {
+      "type": "image-banner",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Browse our latest products",
+            "heading_size": "h0"
+          }
+        },
+        "button": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "Shop all",
+            "button_link_1": "shopify://collections/all",
+            "button_style_secondary_1": true,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "button"
+      ],
+      "settings": {
+        "image_overlay_opacity": 50,
+        "image_height": "large",
+        "image_behavior": "none",
+        "desktop_content_position": "bottom-center",
+        "desktop_content_alignment": "center",
+        "show_text_box": false,
+        "color_scheme": "background-1",
+        "stack_images_on_mobile": false,
+        "mobile_content_alignment": "center",
+        "show_text_below": false
+      }
+    },
+    "bundle_builder_4BQqMQ": {
+      "type": "bundle-builder",
+      "name": "Bundle Builder",
+      "settings": {
+        "hero_heading": "Build the set that fits your style",
+        "hero_text": "Pick a shirt, match it with an accessory, and unlock better bundle pricing as you add more.",
+        "shirt_collection": "shirt",
+        "accessory_collection": "head",
+        "extra_collection": "necklace",
+        "products_per_step": 6,
+        "enable_extras": true,
+        "enable_mobile_sticky": true,
+        "step1_heading": "Choose a Shirt",
+        "step1_description": "Select your preferred shirt style and size",
+        "step2_heading": "Choose an Accessory",
+        "step2_description": "Pair your shirt with one accessory to complete the base bundle.",
+        "step3_heading": "Add Extras (Optional)",
+        "step3_description": "Extras are optional, but they can unlock a better discount tier.",
+        "step4_heading": "Review and Add to Cart",
+        "step4_description": "Double-check your selections, pricing, and discount before adding everything to cart.",
+        "discount_tier1_items": 2,
+        "discount_tier1_percent": 10,
+        "discount_tier2_items": 4,
+        "discount_tier2_percent": 15,
+        "discount_tier3_items": 6,
+        "discount_tier3_percent": 20,
+        "background_color": "#ffffff",
+        "accent_color": "#ffffff",
+        "color_scheme": ""
+      }
+    },
+    "featured_collection": {
+      "type": "featured-collection",
+      "settings": {
+        "collection": "shop-all",
+        "products_to_show": 8,
+        "title": "Featured products",
+        "heading_size": "h2",
+        "description": "",
+        "show_description": true,
+        "description_style": "body",
+        "columns_desktop": 4,
+        "enable_desktop_slider": false,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "color_scheme": "background-1",
+        "image_ratio": "portrait",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": true,
+        "show_rating": true,
+        "quick_add": "none",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 44,
+        "padding_bottom": 36
+      }
+    },
+    "image_width_video_gallery_9arWYi": {
+      "type": "image-width-video-gallery",
+      "blocks": {
+        "video_xPQXeg": {
+          "type": "video",
+          "settings": {
+            "video": "shopify://files/videos/227590_medium (1).mp4",
+            "poster_video": "shopify://shop_images/2015-07-02_Ashley_34_51031_24040.jpg"
+          }
+        },
+        "image_tGAnka": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/2015-07-02_Ashley_33_51032_24034.jpg"
+          }
+        },
+        "video_tTnCtD": {
+          "type": "video",
+          "settings": {
+            "video": "shopify://files/videos/1006-142621176_medium.mp4",
+            "poster_video": "shopify://shop_images/1-1-square-allec-gomes-vvcm0olbczm-unsplash-jpg_custom_resized-min_1.png"
+          }
+        },
+        "image_EGWpHe": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/2015-07-02_Ashley_36_51037_24066.jpg"
+          }
+        },
+        "video_PDrRxY": {
+          "type": "video",
+          "settings": {
+            "video": "shopify://files/videos/227590_medium (1).mp4",
+            "poster_video": "shopify://shop_images/2015-07-02_Ashley_34_51031_24040.jpg"
+          }
+        },
+        "image_P7BDfH": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/2015-07-02_Ashley_33_51032_24034.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "video_xPQXeg",
+        "image_tGAnka",
+        "video_tTnCtD",
+        "image_EGWpHe",
+        "video_PDrRxY",
+        "image_P7BDfH"
+      ],
+      "settings": {
+        "heading": ""
+      }
+    },
+    "product_hexa_slider_MKGm99": {
+      "type": "product-hexa-slider",
+      "blocks": {
+        "benefit_ywGFKz": {
+          "type": "benefit",
+          "settings": {
+            "benefit_no": "1",
+            "benefit_title": "Natural Energy",
+            "benefit_description": "<p>Publishing a theme from your library will switch it to your current theme.</p>"
+          }
+        },
+        "benefit_6eFwkM": {
+          "type": "benefit",
+          "settings": {
+            "benefit_no": "2",
+            "benefit_title": "Natural Energy",
+            "benefit_description": "<p>Publishing a theme from your library will switch it to your current theme.</p>"
+          }
+        },
+        "benefit_PL9VhB": {
+          "type": "benefit",
+          "settings": {
+            "benefit_no": "3",
+            "benefit_title": "Natural Energy",
+            "benefit_description": "<p>Publishing a theme from your library will switch it to your current theme.</p>"
+          }
+        },
+        "benefit_ncNMWJ": {
+          "type": "benefit",
+          "settings": {
+            "benefit_no": "4",
+            "benefit_title": "Natural Energy",
+            "benefit_description": "<p>Publishing a theme from your library will switch it to your current theme.</p>"
+          }
+        },
+        "benefit_mkAWit": {
+          "type": "benefit",
+          "settings": {
+            "benefit_no": "5",
+            "benefit_title": "Natural Energy",
+            "benefit_description": "<p>Publishing a theme from your library will switch it to your current theme.</p>"
+          }
+        },
+        "benefit_njiCP3": {
+          "type": "benefit",
+          "settings": {
+            "benefit_no": "6",
+            "benefit_title": "Natural Energy",
+            "benefit_description": "<p>Publishing a theme from your library will switch it to your current theme.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "benefit_ywGFKz",
+        "benefit_6eFwkM",
+        "benefit_PL9VhB",
+        "benefit_ncNMWJ",
+        "benefit_mkAWit",
+        "benefit_njiCP3"
+      ],
+      "name": "Benefit Hexa Slider",
+      "settings": {
+        "benefit_image": "shopify://shop_images/DSC00816_1.png",
+        "slider_auto_speed": 3000,
+        "slider_description": "Add your description here."
+      }
+    },
+    "ctm_faq_qLJ9xB": {
+      "type": "ctm-faq",
+      "blocks": {
+        "faq_item_block_BtMFTJ": {
+          "type": "faq_item_block",
+          "settings": {
+            "question": "What makes Mānuka honey different from regular honey?",
+            "answer": "<p>The question you want to display for this FAQ item.</p>",
+            "answer_no": "01"
+          }
+        },
+        "faq_item_block_jpd8Gp": {
+          "type": "faq_item_block",
+          "settings": {
+            "question": "What makes Mānuka honey different from regular honey?",
+            "answer": "<p>The question you want to display for this FAQ item.</p>",
+            "answer_no": "02"
+          }
+        },
+        "faq_item_block_UpaH64": {
+          "type": "faq_item_block",
+          "settings": {
+            "question": "What makes Mānuka honey different from regular honey?",
+            "answer": "<p>The question you want to display for this FAQ item.</p>",
+            "answer_no": "03"
+          }
+        },
+        "faq_item_block_hiGipK": {
+          "type": "faq_item_block",
+          "settings": {
+            "question": "What makes Mānuka honey different from regular honey?",
+            "answer": "<p>The question you want to display for this FAQ item.</p>",
+            "answer_no": "04"
+          }
+        },
+        "faq_item_block_QMBQ4Y": {
+          "type": "faq_item_block",
+          "settings": {
+            "question": "What makes Mānuka honey different from regular honey?",
+            "answer": "<p>The question you want to display for this FAQ item.</p>",
+            "answer_no": "05"
+          }
+        },
+        "faq_item_block_NhjWKp": {
+          "type": "faq_item_block",
+          "settings": {
+            "question": "What makes Mānuka honey different from regular honey?",
+            "answer": "<p>The question you want to display for this FAQ item.</p>",
+            "answer_no": "06"
+          }
+        }
+      },
+      "block_order": [
+        "faq_item_block_BtMFTJ",
+        "faq_item_block_jpd8Gp",
+        "faq_item_block_UpaH64",
+        "faq_item_block_hiGipK",
+        "faq_item_block_QMBQ4Y",
+        "faq_item_block_NhjWKp"
+      ],
+      "name": "FAQ Section",
+      "settings": {
+        "faq_section_title": "Frequently Asked Questions",
+        "button_lable": "<p>View All</p>",
+        "button_link": "#"
+      }
+    },
+    "key_compounds_section_i9YcQJ": {
+      "type": "key-compounds-section",
+      "blocks": {
+        "key_compound_W8N8QU": {
+          "type": "key_compound",
+          "settings": {
+            "compound_title": "Methylglyoxal (MGO)",
+            "compound_description": "<p>Publishing a theme from your library will switch it to your current theme.</p>"
+          }
+        },
+        "key_compound_EetD9L": {
+          "type": "key_compound",
+          "settings": {
+            "compound_title": "Methylglyoxal (MGO)",
+            "compound_description": "<p>Publishing a theme from your library will switch it to your current theme.</p>"
+          }
+        },
+        "key_compound_RB3N4P": {
+          "type": "key_compound",
+          "settings": {
+            "compound_title": "Methylglyoxal (MGO)",
+            "compound_description": "<p>Publishing a theme from your library will switch it to your current theme.</p>"
+          }
+        },
+        "key_compound_wAUNXR": {
+          "type": "key_compound",
+          "settings": {
+            "compound_title": "Methylglyoxal (MGO)",
+            "compound_description": "<p>Publishing a theme from your library will switch it to your current theme.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "key_compound_W8N8QU",
+        "key_compound_EetD9L",
+        "key_compound_RB3N4P",
+        "key_compound_wAUNXR"
+      ],
+      "name": "Key Compounds Section",
+      "settings": {
+        "section_title": "The key compounds that make Mānuka honey a superfood",
+        "media_type": "image",
+        "background_image": "shopify://shop_images/2015-07-02_Ashley_12_51000_23825.jpg",
+        "video_url": ""
+      }
+    },
+    "1774006456d33e2ed9": {
+      "type": "apps",
+      "blocks": {
+        "ugc_video_star_rating_qgb6tn": {
+          "type": "shopify://apps/ugc-video/blocks/star_rating/019d0ad6-4254-789a-b3c1-5a7a9d644db8",
+          "settings": {
+            "eyebrow": "Real customer videos",
+            "heading": "See how our community styles it",
+            "description": "<p>Show uploaded UGC videos or a simple manual video set in any app-block-ready theme section.</p>",
+            "autoplay": false,
+            "loop_videos": true,
+            "card_gap": 16,
+            "corner_radius": 18,
+            "section_background": "#f5efe6",
+            "card_background": "#fffaf5",
+            "text_color": "#1c130f",
+            "accent_color": "#c35b32",
+            "video_url_1": "",
+            "title_1": "Customer try-on",
+            "caption_1": "Short testimonial or creator name",
+            "video_url_2": "",
+            "title_2": "Unboxing moment",
+            "caption_2": "Explain what the shopper is showing",
+            "video_url_3": "",
+            "title_3": "Before and after",
+            "caption_3": "Use this for social proof",
+            "video_url_4": "",
+            "title_4": "Creator spotlight",
+            "caption_4": "Show how the product is used"
+          }
+        }
+      },
+      "block_order": [
+        "ugc_video_star_rating_qgb6tn"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    }
+  },
+  "order": [
+    "image_banner",
+    "bundle_builder_4BQqMQ",
+    "featured_collection",
+    "image_width_video_gallery_9arWYi",
+    "product_hexa_slider_MKGm99",
+    "ctm_faq_qLJ9xB",
+    "key_compounds_section_i9YcQJ",
+    "1774006456d33e2ed9"
+  ]
+}

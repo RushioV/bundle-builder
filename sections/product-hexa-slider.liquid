@@ -1,0 +1,512 @@
+<div class="section-benefits">
+  <div class="background-image">
+    <img
+      src="{{ section.settings.benefit_image | image_url: width: 2500 }}"
+      alt=""
+      loading="lazy"
+      width="auto"
+      height="auto"
+      class="parallax-image"
+      style="transform: scale(1.199);"
+    >
+  </div>
+  <div class="c-container">
+    <div class="content-benefits">
+      <h2>{{ section.settings.slider_description }}</h2>
+      <div class="hex-container">
+        <svg xmlns="http://www.w3.org/2000/svg" width="411" height="357" viewBox="0 0 411 357" fill="none">
+          <polygon class="hex-base" points="305,2 408,177 308,353 106,355 2,181 103,3" fill="none" stroke="#ccc" stroke-width="3"></polygon>
+        </svg>
+
+        {% for block in section.blocks %}
+          <div class="point p{{ forloop.index }}">
+            <span>{{ block.settings.benefit_no }}</span>
+          </div>
+        {% endfor %}
+
+        <div class="center-text">
+          <p id="center-text">{{ settings.slider_description }}</p>
+        </div>
+      </div>
+
+      <div class="content-text-benefits">
+        {% for block in section.blocks %}
+            <div class="benefits-description">
+                <div class="benefits_title">{{ block.settings.benefit_title }}</div>
+                <div class="benefits_content"> {{ block.settings.benefit_description }}</div>
+
+            </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+      .section-benefits {
+      width: 100%;
+      position: relative;
+      min-height: 548px;
+      display: flex;
+  }
+
+  .section-benefits .background-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+      overflow: hidden;
+  }
+
+  .section-benefits .background-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+  }
+
+  .section-benefits.section-benefits-rounded {
+      border-radius: 20px;
+  }
+
+  .section-benefits::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(46, 46, 36, 0.4);
+      z-index: 0;
+  }
+
+  .section-benefits.section-benefits-rounded::before {
+      border-radius: 20px;
+  }
+
+  .section-benefits .c-container {
+      max-width: 1440px;
+      margin: auto;
+      padding: 40px 60px;
+      width: 100%;
+  }
+
+  .section-benefits .c-container h2 {
+      color: #FAF9F6;
+      
+      font-size: 40px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 120%;
+      max-width: 360px;
+  }
+
+  .section-benefits .c-container .content-benefits {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      gap: 20px;
+  }
+
+
+  .section-benefits .c-container .hex-container {
+      position: relative;
+      width: 402px;
+      height: 402px;
+      margin: auto;
+  }
+
+  .section-benefits .c-container .hex-container svg {
+      height: 100%;
+      width:100%;
+  }
+
+  .section-benefits .c-container .hex-container .lines {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+  }
+
+  .section-benefits .c-container .hex-container .hex-base {
+      stroke: #ffffff;
+  }
+
+
+  .section-benefits .c-container .hex-container .point {
+      position: absolute;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: white;
+      border: 2px solid #ccc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #2E2E24;
+      text-align: center;
+      
+      font-size: 12px;
+      line-height: normal;
+      font-style: normal;
+      font-weight: 500;
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 2;
+      cursor: pointer;
+      will-change: transform, box-shadow;
+      transform: translateZ(0);
+      backface-visibility: hidden;
+  }
+
+  .section-benefits .c-container .hex-container .p1 {
+      top: 12px;
+      left: 75%;
+      transform: translateX(-50%);
+  }
+
+  .section-benefits .c-container .hex-container .p2 {
+      top: 184px;
+      right: -8px;
+  }
+
+  .section-benefits .c-container .hex-container .p3 {
+      bottom: 20px;
+      right: 80px;
+  }
+
+  .section-benefits .c-container .hex-container .p4 {
+      bottom: 20px;
+      left: 25%;
+      transform: translateX(-50%);
+  }
+
+  .section-benefits .c-container .hex-container .p5 {
+      bottom: 184px;
+      left: -8px;
+  }
+
+  .section-benefits .c-container .hex-container .p6 {
+      top: 12px;
+      left: 20%;
+  }
+
+  .section-benefits .c-container .hex-container .active {
+      background: #043085;
+      border-color: #043085;
+      color:#fff;
+  }
+
+  .section-benefits .c-container .hex-container .point::before {
+      content: "";
+      background-image: url('https://cdn.shopify.com/s/files/1/0658/8422/5790/files/Flowers_59_1.svg?v=1766139728');
+      position: absolute;
+      top: -12px;
+      left: -12px;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background-repeat: no-repeat;
+      background-position: center;
+      z-index: -1;
+      transform: scale(0) rotate(-180deg) translateZ(0);
+      opacity: 0;
+      background-size: 0%;
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      will-change: transform, opacity, background-size;
+      backface-visibility: hidden;
+  }
+
+  .section-benefits .c-container .hex-container .active::before {
+      transform: scale(1) rotate(0deg) translateZ(0);
+      opacity: 1;
+      background-size: 100%;
+  }
+
+  .section-benefits .c-container .hex-container .center-text {
+      position: absolute;
+      top: 47%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: #FAF9F6;
+      text-align: center; 
+      font-size: 26px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 120%;
+  }
+
+  .section-benefits .c-container .benefits-description {
+      color: #FAF9F6;
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 120%;
+      letter-spacing: -0.36px;
+      max-width: 360px;
+      width: 100%;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      visibility: hidden;
+      display: none;
+      margin: 0;
+  }
+
+  .section-benefits .c-container .benefits-description.active {
+      opacity: 1;
+      display: block;
+      visibility: visible;
+  }
+
+  @media only screen and (max-width: 1280px) {
+      .section-benefits .c-container {
+          padding: 40px 20px;
+      }
+
+      .section-benefits .c-container h2,
+      .section-benefits .c-container .benefits-description {
+          max-width: 270px;
+      }
+  }
+
+  @media only screen and (max-width: 992px) {
+      .section-benefits .c-container .content-benefits {
+          flex-direction: column;
+      }
+  }
+
+
+  @media only screen and (max-width: 568px) {
+      .section-benefits .c-container h2 {
+          font-size: 24px;
+          font-style: normal;
+          text-align: center;
+      }
+
+      .section-benefits .c-container .hex-container {
+          width: 318px;
+          height: 318px;
+      }
+
+      .section-benefits .c-container .hex-container .center-text {
+          font-size: 18px;
+          font-style: normal;
+          top: 55%;
+      }
+
+      .section-benefits .c-container .benefits-description {
+          font-size: 14px;
+          font-style: normal;
+          max-width: 301px;
+          text-align: center;
+          margin: 50px 0 0;
+      }
+
+      .section-benefits .c-container .hex-container .p3 {
+          bottom: 8px;
+          right: 60px;
+      }
+
+      .section-benefits .c-container .hex-container .p4 {
+          bottom: 8px;
+      }
+
+      .section-benefits .c-container .hex-container .p5 {
+          top: 147px;
+      }
+
+      .section-benefits .c-container .hex-container .p2 {
+          top: 147px;
+      }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const points = document.querySelectorAll('.point');
+    const descriptions = document.querySelectorAll('.benefits-description');
+    const centerText = document.getElementById('center-text');
+    const AUTOPLAY_SPEED = 3000;
+    const INACTIVITY_DELAY = 5000;
+    let current = 0;
+    let autoplayTimer = null;
+    let resumeTimer = null;
+    let isAutoplaying = false;
+
+    const centerTexts = [
+      `<p><strong>Prebiotics</strong> for balanced digestion</p>`,
+
+      `<p><strong>Antioxidants</strong> that support balance</p>`,
+
+      `<p><strong>MGO</strong> for immune support</p>`,
+
+      `<p><strong>Natural carbohydrates</strong> for steady energy</p>`,
+
+      `<p><strong>Polyphenols</strong> that defend and support </p>`,
+
+      `<p><strong>Mānuka</strong> for everyday wellness</p>`,
+    ];
+
+    if (points.length === 0) return;
+
+    function activatePoint(index) {
+      points.forEach((p) => p.classList.remove('active'));
+      descriptions.forEach((d) => d.classList.remove('active'));
+      points[index].classList.add('active');
+      descriptions[index].classList.add('active');
+      centerText.innerHTML = centerTexts[index] || '';
+    }
+
+    function stopAutoplay() {
+      if (autoplayTimer) {
+        clearTimeout(autoplayTimer);
+        autoplayTimer = null;
+      }
+      isAutoplaying = false;
+    }
+
+    function clearResumeTimer() {
+      if (resumeTimer) {
+        clearTimeout(resumeTimer);
+        resumeTimer = null;
+      }
+    }
+
+    function nextPoint() {
+      if (autoplayTimer) {
+        clearTimeout(autoplayTimer);
+        autoplayTimer = null;
+      }
+      current++;
+      if (current >= points.length) {
+        current = 0;
+      }
+      activatePoint(current);
+      if (isAutoplaying) {
+        autoplayTimer = setTimeout(() => {
+          nextPoint();
+        }, AUTOPLAY_SPEED);
+      }
+    }
+
+    function startAutoplay(immediate = false) {
+      clearResumeTimer();
+      stopAutoplay();
+      isAutoplaying = true;
+      if (immediate) {
+        nextPoint();
+      } else {
+        autoplayTimer = setTimeout(() => {
+          nextPoint();
+        }, AUTOPLAY_SPEED);
+      }
+    }
+
+    function pauseAndResume() {
+      stopAutoplay();
+      clearResumeTimer();
+      resumeTimer = setTimeout(() => {
+        startAutoplay(true);
+      }, INACTIVITY_DELAY);
+    }
+
+    points.forEach((point, index) => {
+      point.addEventListener('mouseenter', () => {
+        clearResumeTimer();
+        stopAutoplay();
+        current = index;
+        activatePoint(current);
+      });
+      point.addEventListener('mouseleave', () => {
+        pauseAndResume();
+      });
+      point.addEventListener('click', () => {
+        clearResumeTimer();
+        stopAutoplay();
+        current = index;
+        activatePoint(current);
+        pauseAndResume();
+      });
+    });
+
+    activatePoint(0);
+    startAutoplay(false);
+
+    window.addEventListener('beforeunload', () => {
+      stopAutoplay();
+      clearResumeTimer();
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Benefit Hexa Slider",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Benefit Slider Settings"
+    },
+    {
+        "type": "image_picker",
+        "id": "benefit_image",
+        "label": "Benefit Image"
+    },
+    {
+      "type": "range",
+      "id": "slider_auto_speed",
+      "label": "Slider Auto Speed",
+      "min": 1000,
+      "max": 9000, // Corrected max value
+      "step": 1000,
+      "unit": "ms",
+      "default": 3000
+    },
+    {
+      "type": "inline_richtext",
+      "id": "slider_description",
+      "label": "Heading",
+      "default": "Add your description here."
+    },
+    {
+      "type": "header",
+      "content": "Benefits"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit",
+      "settings": [
+        {
+          "type": "text",
+          "id": "benefit_no",
+          "label": "Benefit Number",
+          "default": "1"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "benefit_title",
+          "label": "Benefit Title",
+          "default": "Natural Energy"
+        },
+        {
+          "type": "richtext",
+          "id": "benefit_description",
+          "label": "Benefit Description",
+        },
+        
+      ],
+    }
+  ],
+  "presets": [
+    {
+      "name": "Benefit Hexa Slider"
+    }
+  ]
+}
+{% endschema %}

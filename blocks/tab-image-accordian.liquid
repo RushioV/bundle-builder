@@ -1,0 +1,1135 @@
+
+{% assign ctm_gen_id = block.id | replace: '_', '' | downcase %}
+
+
+
+<product-tabs-{{ ctm_gen_id }} class="ctm-product-tabs-{{ ctm_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="page-width ctm-tabs-container-{{ ctm_gen_id }}">
+    <div class="ctm-tab-buttons-{{ ctm_gen_id }}">
+      {% for i in (1..5) %}
+        {% assign tab_enabled_key = 'tab_' | append: i | append: '_enabled' %}
+        {% assign tab_title_key = 'tab_' | append: i | append: '_title' %}
+        {% if block.settings[tab_enabled_key] and block.settings[tab_title_key] != blank %}
+          <button
+            class="ctm-tab-button-{{ ctm_gen_id }} {% if forloop.first %}active{% endif %}"
+            data-tab="tab-{{ i }}"
+            aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+          >
+            {{ block.settings[tab_title_key] }}
+          </button>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <div class="ctm-mobile-accordion-{{ ctm_gen_id }}">
+      {% for i in (1..5) %}
+        {% assign tab_enabled_key = 'tab_' | append: i | append: '_enabled' %}
+        {% assign tab_title_key = 'tab_' | append: i | append: '_title' %}
+        {% assign tab_image_key = 'tab_' | append: i | append: '_image' %}
+        {% assign tab_content_title_key = 'tab_' | append: i | append: '_content_title' %}
+        {% assign tab_description_key = 'tab_' | append: i | append: '_description' %}
+        
+        {% if block.settings[tab_enabled_key] and block.settings[tab_title_key] != blank %}
+          <div class="ctm-mobile-accordion-item-{{ ctm_gen_id }}">
+            <button
+              class="ctm-mobile-accordion-header-{{ ctm_gen_id }}"
+              aria-expanded="false"
+              data-mobile-tab="{{ i }}"
+            >
+              {{ block.settings[tab_title_key] }}
+              <span class="ctm-mobile-accordion-icon-{{ ctm_gen_id }}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 29" fill="none">
+                  <g clip-path="url(#clip0_204_38896)">
+                    <path d="M27.3929 11.9692C27.2322 11.8086 26.9912 11.6479 26.9912 11.4069C26.9912 11.2462 27.0716 11.1659 27.1519 11.0052C27.7142 10.0413 27.4732 8.6756 26.5092 8.03294C25.8666 7.63128 25.0632 7.55095 24.3403 7.71161C23.6173 7.87228 22.9746 8.19361 22.3319 8.59527C21.7696 8.99693 21.127 9.31826 20.5646 9.80026C20.5646 9.47893 20.5646 9.1576 20.3236 8.9166C20.4843 8.75594 20.645 8.59527 20.8056 8.51494C21.7696 7.63128 22.7336 6.66729 23.2959 5.46231C23.5369 4.81965 23.6976 4.09666 23.3763 3.454C22.8943 2.49001 21.5286 2.40967 20.4843 2.65067C20.2433 2.731 20.0023 2.731 19.8416 2.57034C19.7613 2.49001 19.681 2.32934 19.681 2.24901C19.2793 1.20469 18.0743 0.56203 16.9497 0.883359C16.2267 1.12436 15.6644 1.68668 15.343 2.32934C15.0217 2.972 14.861 3.77533 14.7807 4.49832C14.7004 4.89998 14.7004 5.22131 14.7004 5.62297C14.4594 5.46231 14.138 5.38197 13.897 5.46231H13.8167C13.7364 4.17699 13.5757 2.89167 12.9331 1.76702C12.6117 1.12436 12.1297 0.56203 11.4067 0.481697C10.3624 0.2407 9.39842 1.20469 8.99676 2.24901C8.91643 2.40967 8.8361 2.65067 8.5951 2.731C8.43443 2.731 8.3541 2.731 8.19344 2.65067C7.14912 2.24901 5.8638 2.89167 5.46214 3.93599C5.22114 4.57865 5.30147 5.38197 5.6228 6.02463C5.94413 6.66729 6.42612 7.22962 6.90812 7.79195C7.63111 8.59527 8.43443 9.31826 9.31809 9.96092C9.31809 9.96092 9.31809 9.96092 9.39842 10.0413C8.99676 9.88059 8.5951 9.88059 8.19344 10.0413C7.87211 9.80026 7.55078 9.55926 7.22945 9.31826C6.10479 8.59527 4.98014 7.87228 3.69482 7.63128C2.97183 7.47062 2.16851 7.47062 1.68651 7.95261C0.883187 8.6756 1.04385 9.96092 1.52585 10.9249C1.60618 11.1659 1.68651 11.4069 1.60618 11.6479C1.52585 11.7282 1.44551 11.8086 1.28485 11.8889C0.32086 12.4512 -0.000470132 13.8972 0.561857 14.8612C0.963519 15.5039 1.60618 15.9055 2.32917 16.0662C3.05216 16.2268 3.77515 16.2268 4.57848 16.1465C5.22114 16.0662 5.78346 15.9859 6.42612 15.8252V15.9055C6.42612 16.1465 6.58679 16.3875 6.66712 16.6285C6.42612 16.7088 6.10479 16.7892 5.8638 16.8695C4.57848 17.2712 3.29316 17.7532 2.32917 18.5565C1.84718 19.0385 1.36518 19.6008 1.36518 20.3238C1.36518 21.3681 2.57017 22.0911 3.61449 22.3321C3.85549 22.4124 4.09648 22.4124 4.17682 22.6534C4.25715 22.8141 4.17682 22.8944 4.17682 23.0551C4.01615 24.1798 4.89981 25.3044 6.02446 25.4651C6.74745 25.5454 7.47045 25.3044 8.11311 24.8224C8.67543 24.3404 9.15743 23.7781 9.55909 23.1354C9.88042 22.5731 10.2017 22.0911 10.5231 21.5288C10.6034 21.8501 10.7641 22.1714 11.0051 22.4124C11.0051 22.4928 10.9247 22.5731 10.9247 22.6534C10.4427 23.8584 9.96075 25.1437 10.0411 26.5094C10.0411 27.2324 10.2821 27.9554 10.8444 28.357C11.7281 28.9997 12.9331 28.5177 13.8167 27.875C13.9774 27.7144 14.2184 27.5537 14.4594 27.6341C14.62 27.6341 14.7004 27.7947 14.7807 27.875C15.584 28.6784 17.03 28.6784 17.8333 27.9554C18.3957 27.4734 18.6367 26.6701 18.6367 25.9471C18.6367 25.2241 18.476 24.5011 18.235 23.7781C18.0743 23.2961 17.9137 22.8141 17.6727 22.3321C17.9137 22.0911 18.0743 21.8501 18.1547 21.5288C18.3153 21.7698 18.476 22.0911 18.5563 22.3321C19.199 23.4568 19.922 24.6618 21.0466 25.3847C21.609 25.7864 22.3319 26.1077 22.9746 25.9471C24.0189 25.7061 24.4206 24.4208 24.4206 23.2961C24.4206 23.0551 24.4206 22.8141 24.5813 22.6534C24.6616 22.5731 24.8223 22.5731 24.9829 22.5731C26.1076 22.4124 26.9912 21.3681 26.9109 20.2435C26.8306 19.5205 26.4289 18.7975 25.8666 18.3958C25.3042 17.9138 24.5813 17.5925 23.9386 17.3515C23.2959 17.1105 22.7336 16.9498 22.0909 16.7892C22.4123 16.6285 22.7336 16.3875 22.8943 16.1465C22.9746 16.1465 23.0549 16.1465 23.1353 16.1465C24.4206 16.3875 25.7862 16.4678 27.0716 16.1465C27.7142 15.9859 28.4372 15.5842 28.6782 14.9415C28.9995 13.8169 28.2765 12.6922 27.3929 11.9692Z" fill="#F6BE00"></path>
+                  </g>
+                  <path d="M13.9431 19.499V15.0741H9.99609V13.9045H13.9431V9.49902H15.0491V13.9045H18.9961V15.0741H15.0491V19.499H13.9431Z" fill="#2E2E24"></path>
+                  <defs>
+                  <clipPath id="clip0_204_38896">
+                  <rect width="29" height="29" fill="white"></rect>
+                  </clipPath>
+                  </defs>
+                </svg>
+              </span>
+            </button>
+            <div class="ctm-mobile-accordion-content-{{ ctm_gen_id }}">
+              <div class="ctm-mobile-accordion-body-{{ ctm_gen_id }}">
+                <div class="ctm-content-wrapper-{{ ctm_gen_id }} {% if block.settings.image_position == 'right' %}image-right{% endif %}">
+                  <div class="ctm-image-container-{{ ctm_gen_id }}">
+                    {% if block.settings[tab_image_key] %}
+                      <img
+                        src="{{ block.settings[tab_image_key] | image_url: width: 800 }}"
+                        alt="{{ block.settings[tab_image_key].alt | escape }}"
+                        loading="lazy"
+                        width="{{ block.settings[tab_image_key].width }}"
+                        height="{{ block.settings[tab_image_key].height }}"
+                      >
+                    {% else %}
+                      <div class="ctm-image-placeholder-{{ ctm_gen_id }}">
+                        {{ 'product-1' | placeholder_svg_tag }}
+                      </div>
+                    {% endif %}
+                  </div>
+
+                  <div class="ctm-text-container-{{ ctm_gen_id }}">
+                    {% if block.settings[tab_content_title_key] != blank %}
+                      <h3 class="ctm-tab-title-{{ ctm_gen_id }}">{{ block.settings[tab_content_title_key] }}</h3>
+                    {% endif %}
+
+                    {% if block.settings[tab_description_key] != blank %}
+                      <div class="ctm-tab-description-{{ ctm_gen_id }}">
+                        {{ block.settings[tab_description_key] }}
+                      </div>
+                    {% endif %}
+
+                    <div class="ctm-accordion-{{ ctm_gen_id }}">
+                      {% for j in (1..3) %}
+                        {% assign accordion_enabled_key = 'tab_' | append: i | append: '_accordion_' | append: j | append: '_enabled' %}
+                        {% assign accordion_title_key = 'tab_' | append: i | append: '_accordion_' | append: j | append: '_title' %}
+                        {% assign accordion_content_key = 'tab_' | append: i | append: '_accordion_' | append: j | append: '_content' %}
+                        
+                        {% if block.settings[accordion_enabled_key] and block.settings[accordion_title_key] != blank %}
+                          <div class="ctm-accordion-item-{{ ctm_gen_id }}">
+                            <button
+                              class="ctm-accordion-header-{{ ctm_gen_id }}"
+                              aria-expanded="false"
+                              data-accordion="tab-{{ i }}-acc-{{ j }}"
+                            >
+                              {{ block.settings[accordion_title_key] }}
+                              <span class="ctm-accordion-icon-{{ ctm_gen_id }}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="14" viewBox="0 0 13 14" fill="none">
+                                  <path d="M5.60495 13.7237V7.77287H0.296875V6.19997H5.60495V0.275391H7.09224V6.19997H12.4003V7.77287H7.09224V13.7237H5.60495Z" fill="#2E2E24"></path>
+                                </svg>
+                              </span>
+                            </button>
+                            <div class="ctm-accordion-content-{{ ctm_gen_id }}">
+                              <div class="ctm-accordion-body-{{ ctm_gen_id }}">
+                                {{ block.settings[accordion_content_key] }}
+                              </div>
+                            </div>
+                          </div>
+                        {% endif %}
+                      {% endfor %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <div class="ctm-tab-contents-{{ ctm_gen_id }}">
+      {% for i in (1..5) %}
+        {% assign tab_enabled_key = 'tab_' | append: i | append: '_enabled' %}
+        {% assign tab_title_key = 'tab_' | append: i | append: '_title' %}
+        {% assign tab_image_key = 'tab_' | append: i | append: '_image' %}
+        {% assign tab_content_title_key = 'tab_' | append: i | append: '_content_title' %}
+        {% assign tab_description_key = 'tab_' | append: i | append: '_description' %}
+        
+        {% if block.settings[tab_enabled_key] and block.settings[tab_title_key] != blank %}
+          <div class="ctm-tab-content-{{ ctm_gen_id }} {% if forloop.first %}active{% endif %}" data-tab-content="tab-{{ i }}">
+            <div class="ctm-content-wrapper-{{ ctm_gen_id }} {% if block.settings.image_position == 'right' %}image-right{% endif %}">
+              <div class="ctm-image-container-{{ ctm_gen_id }}">
+                {% if block.settings[tab_image_key] %}
+                  <img
+                    src="{{ block.settings[tab_image_key] | image_url: width: 800 }}"
+                    alt="{{ block.settings[tab_image_key].alt | escape }}"
+                    loading="lazy"
+                    width="{{ block.settings[tab_image_key].width }}"
+                    height="{{ block.settings[tab_image_key].height }}"
+                  >
+                {% else %}
+                  <div class="ctm-image-placeholder-{{ ctm_gen_id }}">
+                    {{ 'product-1' | placeholder_svg_tag }}
+                  </div>
+                {% endif %}
+              </div>
+
+              <div class="ctm-text-container-{{ ctm_gen_id }}">
+                <div class="ctm-product-tabs_inner">
+                  {% if block.settings[tab_content_title_key] != blank %}
+                    <h3 class="ctm-tab-title-{{ ctm_gen_id }}">{{ block.settings[tab_content_title_key] }}</h3>
+                  {% endif %}
+
+                  {% if block.settings[tab_description_key] != blank %}
+                    <div class="ctm-tab-description-{{ ctm_gen_id }}">
+                      {{ block.settings[tab_description_key] }}
+                    </div>
+                  {% endif %}
+                </div>
+                <div class="ctm-accordion-{{ ctm_gen_id }}">
+                  {% for j in (1..3) %}
+                    {% assign accordion_enabled_key = 'tab_' | append: i | append: '_accordion_' | append: j | append: '_enabled' %}
+                    {% assign accordion_title_key = 'tab_' | append: i | append: '_accordion_' | append: j | append: '_title' %}
+                    {% assign accordion_content_key = 'tab_' | append: i | append: '_accordion_' | append: j | append: '_content' %}
+                    
+                    {% if block.settings[accordion_enabled_key] and block.settings[accordion_title_key] != blank %}
+                      <div class="ctm-accordion-item-{{ ctm_gen_id }}">
+                        <button
+                          class="ctm-accordion-header-{{ ctm_gen_id }}"
+                          aria-expanded="false"
+                          data-accordion="tab-{{ i }}-acc-{{ j }}"
+                        >
+                          {{ block.settings[accordion_title_key] }}
+                          <span class="ctm-accordion-icon-{{ ctm_gen_id }}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="14" viewBox="0 0 13 14" fill="none">
+                              <path d="M5.60495 13.7237V7.77287H0.296875V6.19997H5.60495V0.275391H7.09224V6.19997H12.4003V7.77287H7.09224V13.7237H5.60495Z" fill="#2E2E24"></path>
+                            </svg>
+                          </span>
+                        </button>
+                        <div class="ctm-accordion-content-{{ ctm_gen_id }}">
+                          <div class="ctm-accordion-body-{{ ctm_gen_id }}">
+                            {{ block.settings[accordion_content_key] }}
+                          </div>
+                        </div>
+                      </div>
+                    {% endif %}
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</product-tabs-{{ ctm_gen_id }}>
+
+{% style %}
+  .ctm-product-tabs-{{ ctm_gen_id }} {
+    display: block;
+    width: 100%;
+    padding: 55px 0px;
+  }
+  .ctm-tab-buttons-{{ ctm_gen_id }} {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+  }
+
+  .ctm-tab-button-{{ ctm_gen_id }} {
+    padding: 20px 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: {{ block.settings.tab_font_size }}px;
+    background-color:#e9f0ff;
+    color:#000F3C;
+    transition: all 0.3s ease;
+    flex: 1;
+    font-weight: 600;
+    border-radius: 12px;
+    text-transform: capitalize;
+  }
+
+  .ctm-tab-button-{{ ctm_gen_id }}:hover {
+    background-color: #000F3C;
+    color: #e9f0ff;
+  }
+
+  .ctm-tab-button-{{ ctm_gen_id }}.active {
+    background-color: #000F3C;
+    color: #e9f0ff;
+  }
+
+  .ctm-tab-content-{{ ctm_gen_id }} {
+    display: none;
+  }
+
+  .ctm-tab-content-{{ ctm_gen_id }}.active {
+    display: block;
+  }
+
+  .ctm-content-wrapper-{{ ctm_gen_id }} {
+    display: flex;
+    gap: 32px;
+    padding:20px;
+    background-color:#e9f0ff;
+    border-radius: 12px;
+  }
+
+  .ctm-content-wrapper-{{ ctm_gen_id }}.image-right {
+    flex-direction: row-reverse;
+  }
+
+  .ctm-image-container-{{ ctm_gen_id }} {
+    flex: 0 0 {{ block.settings.image_width }}%;
+  }
+
+  .ctm-image-container-{{ ctm_gen_id }} img {
+    width: 100%;
+    height: auto;
+    border-radius: {{ block.settings.image_border_radius }}px;
+  }
+
+  .ctm-image-placeholder-{{ ctm_gen_id }} {
+    width: 100%;
+    aspect-ratio: 1;
+    background-color: #f4f4f4;
+    border-radius: {{ block.settings.image_border_radius }}px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ctm-image-placeholder-{{ ctm_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ctm-text-container-{{ ctm_gen_id }} {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+  }
+  .ctm-product-tabs_inner {
+      flex: 1;
+  }
+  .ctm-tab-title-{{ ctm_gen_id }} {
+    font-size: {{ block.settings.title_font_size }}px;
+    color: {{ block.settings.title_color }};
+    margin: 0 0 16px 0;
+    font-weight: 600;
+  }
+
+  .ctm-tab-description-{{ ctm_gen_id }} {
+    font-size: {{ block.settings.description_font_size }}px;
+    color: {{ block.settings.description_color }};
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+
+  .ctm-accordion-{{ ctm_gen_id }} {
+    border-top: 1px solid {{ block.settings.accordion_border_color }};
+  }
+
+  .ctm-accordion-item-{{ ctm_gen_id }} {
+    border-bottom: 1px solid {{ block.settings.accordion_border_color }};
+  }
+
+  .ctm-accordion-header-{{ ctm_gen_id }} {
+    width: 100%;
+    padding: 16px 0;
+    background: none;
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-size: {{ block.settings.accordion_font_size }}px;
+    color: {{ block.settings.accordion_text_color }};
+    font-weight: 600;
+    text-align: left;
+  }
+
+  .ctm-accordion-icon-{{ ctm_gen_id }} {
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+    margin-left: 12px;
+  }
+
+  .ctm-accordion-header-{{ ctm_gen_id }}[aria-expanded="true"] .ctm-accordion-icon-{{ ctm_gen_id }} {
+    transform: rotate(45deg);
+  }
+
+  .ctm-accordion-content-{{ ctm_gen_id }} {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+
+  .ctm-accordion-content-{{ ctm_gen_id }}.active {
+    max-height: 1000px;
+  }
+
+  .ctm-accordion-body-{{ ctm_gen_id }} {
+    padding: 0 0 16px 0;
+    font-size: {{ block.settings.accordion_content_font_size }}px;
+    color: {{ block.settings.accordion_content_color }};
+    line-height: 1.6;
+  }
+
+  @media screen and (max-width: 767px) {
+    .ctm-tab-buttons-{{ ctm_gen_id }} {
+      display: none;
+    }
+
+    .ctm-content-wrapper-{{ ctm_gen_id }} {
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .ctm-image-container-{{ ctm_gen_id }} {
+      flex: 0 0 100%;
+    }
+
+    .ctm-mobile-accordion-{{ ctm_gen_id }} {
+      display: block;
+    }
+
+    .ctm-mobile-accordion-item-{{ ctm_gen_id }} {
+      border-bottom: 1px solid {{ block.settings.accordion_border_color }};
+    }
+
+    .ctm-mobile-accordion-header-{{ ctm_gen_id }} {
+      width: 100%;
+      padding: 16px 0;
+      background: none;
+      border: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-size: {{ block.settings.tab_font_size }}px;
+      color: {{ block.settings.tab_text_color }};
+      font-weight: 600;
+      text-align: left;
+    }
+
+    .ctm-mobile-accordion-icon-{{ ctm_gen_id }} {
+      transition: transform 0.3s ease;
+      flex-shrink: 0;
+      margin-left: 12px;
+    }
+
+    .ctm-mobile-accordion-header-{{ ctm_gen_id }}[aria-expanded="true"] {
+      color: {{ block.settings.tab_active_color }};
+    }
+
+    .ctm-mobile-accordion-header-{{ ctm_gen_id }}[aria-expanded="true"] .ctm-mobile-accordion-icon-{{ ctm_gen_id }} {
+      transform: rotate(180deg);
+    }
+
+    .ctm-mobile-accordion-content-{{ ctm_gen_id }} {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .ctm-mobile-accordion-content-{{ ctm_gen_id }}.active {
+      max-height: 3000px;
+    }
+
+    .ctm-mobile-accordion-body-{{ ctm_gen_id }} {
+      padding: 0 0 16px 0;
+    }
+
+    .ctm-tab-title-{{ ctm_gen_id }} {
+      font-size: {{ block.settings.title_font_size | times: 0.9 }}px;
+    }
+
+    .ctm-tab-description-{{ ctm_gen_id }} {
+      font-size: {{ block.settings.description_font_size | times: 0.9 }}px;
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    .ctm-mobile-accordion-{{ ctm_gen_id }} {
+      display: none;
+    }
+  }
+  @media screen and (max-width: 767px) {
+    .ctm-tab-contents-{{ ctm_gen_id }} {
+      display: none;
+    }
+    .ctm-text-container-{{ ctm_gen_id }} {
+      gap: 0px;
+    }
+    .ctm-tab-description-{{ ctm_gen_id }} {
+      margin-bottom: 0px;
+    }
+    .ctm-tab-description-{{ ctm_gen_id }} p {
+      margin-top:0px;
+    }
+    .ctm-mobile-accordion-header-{{ ctm_gen_id }} {
+      padding:16px;
+    }
+    .ctm-mobile-accordion-header-{{ ctm_gen_id }}[aria-expanded="true"] {
+      background-color: #e9f0ff;
+      border-radius: 12px 12px 0px 0px;
+    }
+    .ctm-mobile-accordion-content-{{ ctm_gen_id }} .ctm-content-wrapper-{{ ctm_gen_id }} {
+      border-radius: 0px 0px 12px 12px;
+      padding-top: 0px;
+    }
+    .ctm-mobile-accordion-icon-{{ ctm_gen_id }} svg g > path {
+      fill: #043085;
+    }
+    .ctm-mobile-accordion-icon-{{ ctm_gen_id }} svg g ~ path {
+      fill: #fff;
+    }
+    .ctm-accordion-body-{{ ctm_gen_id }} p {
+      margin:0px;
+    }
+  }
+{% endstyle %}
+
+<script>
+  (function() {
+    class ProductTabs{{ ctm_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.tabButtons = this.querySelectorAll('.ctm-tab-button-{{ ctm_gen_id }}');
+        this.tabContents = this.querySelectorAll('.ctm-tab-content-{{ ctm_gen_id }}');
+        this.accordionHeaders = this.querySelectorAll('.ctm-accordion-header-{{ ctm_gen_id }}');
+        this.mobileAccordionHeaders = this.querySelectorAll('.ctm-mobile-accordion-header-{{ ctm_gen_id }}');
+        
+        this.setupTabListeners();
+        this.setupAccordionListeners();
+        this.setupMobileAccordionListeners();
+      }
+
+      setupTabListeners() {
+        this.tabButtons.forEach((button) => {
+          button.addEventListener('click', () => {
+            const targetTab = button.getAttribute('data-tab');
+            
+            this.tabButtons.forEach((btn) => {
+              btn.classList.remove('active');
+              btn.setAttribute('aria-selected', 'false');
+            });
+            
+            this.tabContents.forEach((content) => {
+              content.classList.remove('active');
+            });
+            
+            button.classList.add('active');
+            button.setAttribute('aria-selected', 'true');
+            
+            const targetContent = this.querySelector(`[data-tab-content="${targetTab}"]`);
+            if (targetContent) {
+              targetContent.classList.add('active');
+            }
+          });
+        });
+      }
+
+      setupAccordionListeners() {
+        this.accordionHeaders.forEach((header) => {
+          header.addEventListener('click', () => {
+            const isExpanded = header.getAttribute('aria-expanded') === 'true';
+            const content = header.nextElementSibling;
+            const parentTab = header.closest('.ctm-mobile-accordion-body-{{ ctm_gen_id }}');
+            
+            if (parentTab) {
+              const allAccordionsInTab = parentTab.querySelectorAll('.ctm-accordion-header-{{ ctm_gen_id }}');
+              allAccordionsInTab.forEach((h) => {
+                if (h !== header) {
+                  h.setAttribute('aria-expanded', 'false');
+                  h.nextElementSibling.classList.remove('active');
+                }
+              });
+            } else {
+              const parentContent = header.closest('.ctm-tab-content-{{ ctm_gen_id }}');
+              if (parentContent) {
+                const allAccordionsInTab = parentContent.querySelectorAll('.ctm-accordion-header-{{ ctm_gen_id }}');
+                allAccordionsInTab.forEach((h) => {
+                  if (h !== header) {
+                    h.setAttribute('aria-expanded', 'false');
+                    h.nextElementSibling.classList.remove('active');
+                  }
+                });
+              }
+            }
+            
+            header.setAttribute('aria-expanded', !isExpanded);
+            
+            if (!isExpanded) {
+              content.classList.add('active');
+            } else {
+              content.classList.remove('active');
+            }
+          });
+        });
+      }
+
+      setupMobileAccordionListeners() {
+        this.mobileAccordionHeaders.forEach((header) => {
+          header.addEventListener('click', () => {
+            const isExpanded = header.getAttribute('aria-expanded') === 'true';
+            const content = header.nextElementSibling;
+            
+            this.mobileAccordionHeaders.forEach((h) => {
+              if (h !== header) {
+                h.setAttribute('aria-expanded', 'false');
+                h.nextElementSibling.classList.remove('active');
+              }
+            });
+            
+            header.setAttribute('aria-expanded', !isExpanded);
+            
+            if (!isExpanded) {
+              content.classList.add('active');
+            } else {
+              content.classList.remove('active');
+            }
+          });
+        });
+      }
+    }
+
+    customElements.define('product-tabs-{{ ctm_gen_id }}', ProductTabs{{ ctm_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Product tabs",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image position",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "image_width",
+      "label": "Image width",
+      "min": 30,
+      "max": 60,
+      "step": 5,
+      "unit": "%",
+      "default": 45
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "label": "Image border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Tab style"
+    },
+    {
+      "type": "range",
+      "id": "tab_font_size",
+      "label": "Tab font size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Content style"
+    },
+    {
+      "type": "range",
+      "id": "title_font_size",
+      "label": "Title font size",
+      "min": 16,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "description_font_size",
+      "label": "Description font size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Description color",
+      "default": "#666666"
+    },
+    {
+      "type": "header",
+      "content": "Accordion style"
+    },
+    {
+      "type": "range",
+      "id": "accordion_font_size",
+      "label": "Accordion title size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "accordion_text_color",
+      "label": "Accordion title color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "accordion_content_font_size",
+      "label": "Accordion content size",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "accordion_content_color",
+      "label": "Accordion content color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "accordion_border_color",
+      "label": "Accordion border color",
+      "default": "#e0e0e0"
+    },
+    {
+      "type": "header",
+      "content": "Tab 1"
+    },
+    {
+      "type": "checkbox",
+      "id": "tab_1_enabled",
+      "label": "Enable tab 1",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "tab_1_title",
+      "label": "Tab name",
+      "default": "Features"
+    },
+    {
+      "type": "image_picker",
+      "id": "tab_1_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "tab_1_content_title",
+      "label": "Content title",
+      "default": "Product Features"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_1_description",
+      "label": "Description",
+      "default": "<p>Discover the amazing features of this product.</p>"
+    },
+    {
+      "type": "checkbox",
+      "id": "tab_1_accordion_1_enabled",
+      "label": "Enable accordion 1",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "tab_1_accordion_1_title",
+      "label": "Accordion 1 title",
+      "default": "Material & Quality"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_1_accordion_1_content",
+      "label": "Accordion 1 content",
+      "default": "<p>Made from premium materials with exceptional quality.</p>"
+    },
+    {
+      "type": "checkbox",
+      "id": "tab_1_accordion_2_enabled",
+      "label": "Enable accordion 2",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "tab_1_accordion_2_title",
+      "label": "Accordion 2 title",
+      "default": "Dimensions"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_1_accordion_2_content",
+      "label": "Accordion 2 content",
+      "default": "<p>Detailed dimensions and specifications.</p>"
+    },
+    {
+      "type": "checkbox",
+      "id": "tab_1_accordion_3_enabled",
+      "label": "Enable accordion 3",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "tab_1_accordion_3_title",
+      "label": "Accordion 3 title",
+      "default": "Care Instructions"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_1_accordion_3_content",
+      "label": "Accordion 3 content",
+      "default": "<p>How to care for and maintain your product.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Tab 2"
+    },
+    {
+      "type": "checkbox",
+      "id": "tab_2_enabled",
+      "label": "Enable tab 2",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "tab_2_title",
+      "label": "Tab name",
+      "default": "Specifications"
+    },
+    {
+      "type": "image_picker",
+      "id": "tab_2_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "tab_2_content_title",
+      "label": "Content title",
+      "default": "Technical Specs"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_2_description",
+      "label": "Description",
+      "default": "<p>Detailed technical specifications and information.</p>"
+    },
+    {
+      "type": "checkbox",
+      "id": "tab_2_accordion_1_enabled",
+      "label": "Enable accordion 1",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "tab_2_accordion_1_title",
+      "label": "Accordion 1 title",
+      "default": "Technical Details"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_2_accordion_1_content",
+      "label": "Accordion 1 content",
+      "default": "<p>Complete technical details and specifications.</p>"
+    },
+    {
+      "type": "checkbox",
+      "id": "tab_2_accordion_2_enabled",
+      "label": "Enable accordion 2",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "tab_2_accordion_2_title",
+      "label": "Accordion 2 title"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_2_accordion_2_content",
+      "label": "Accordion 2 content"
+    },
+    {
+      "type": "checkbox",
+      "id": "tab_2_accordion_3_enabled",
+      "label": "Enable accordion 3",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "tab_2_accordion_3_title",
+      "label": "Accordion 3 title"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_2_accordion_3_content",
+      "label": "Accordion 3 content"
+    },
+    {
+      "type": "header",
+      "content": "Tab 3"
+    },
+    {
+      "type": "checkbox",
+      "id": "tab_3_enabled",
+      "label": "Enable tab 3",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "tab_3_title",
+      "label": "Tab name",
+      "default": "Shipping"
+    },
+    {
+      "type": "image_picker",
+      "id": "tab_3_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "tab_3_content_title",
+      "label": "Content title",
+      "default": "Shipping Info"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_3_description",
+      "label": "Description",
+      "default": "<p>Learn about our shipping options and delivery times.</p>"
+    },
+    {
+      "type": "checkbox",
+      "id": "tab_3_accordion_1_enabled",
+      "label": "Enable accordion 1",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "tab_3_accordion_1_title",
+      "label": "Accordion 1 title",
+      "default": "Delivery Times"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_3_accordion_1_content",
+      "label": "Accordion 1 content",
+      "default": "<p>Standard delivery takes 3-5 business days.</p>"
+    },
+    {
+      "type": "checkbox",
+      "id": "tab_3_accordion_2_enabled",
+      "label": "Enable accordion 2",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "tab_3_accordion_2_title",
+      "label": "Accordion 2 title"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_3_accordion_2_content",
+      "label": "Accordion 2 content"
+    },
+    {
+      "type": "checkbox",
+      "id": "tab_3_accordion_3_enabled",
+      "label": "Enable accordion 3",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "tab_3_accordion_3_title",
+      "label": "Accordion 3 title"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_3_accordion_3_content",
+      "label": "Accordion 3 content"
+    },
+    {
+      "type": "header",
+      "content": "Tab 4"
+    },
+    {
+      "type": "checkbox",
+      "id": "tab_4_enabled",
+      "label": "Enable tab 4",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "tab_4_title",
+      "label": "Tab name"
+    },
+    {
+      "type": "image_picker",
+      "id": "tab_4_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "tab_4_content_title",
+      "label": "Content title"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_4_description",
+      "label": "Description"
+    },
+    {
+      "type": "checkbox",
+      "id": "tab_4_accordion_1_enabled",
+      "label": "Enable accordion 1",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "tab_4_accordion_1_title",
+      "label": "Accordion 1 title"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_4_accordion_1_content",
+      "label": "Accordion 1 content"
+    },
+    {
+      "type": "checkbox",
+      "id": "tab_4_accordion_2_enabled",
+      "label": "Enable accordion 2",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "tab_4_accordion_2_title",
+      "label": "Accordion 2 title"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_4_accordion_2_content",
+      "label": "Accordion 2 content"
+    },
+    {
+      "type": "checkbox",
+      "id": "tab_4_accordion_3_enabled",
+      "label": "Enable accordion 3",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "tab_4_accordion_3_title",
+      "label": "Accordion 3 title"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_4_accordion_3_content",
+      "label": "Accordion 3 content"
+    },
+    {
+      "type": "header",
+      "content": "Tab 5"
+    },
+    {
+      "type": "checkbox",
+      "id": "tab_5_enabled",
+      "label": "Enable tab 5",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "tab_5_title",
+      "label": "Tab name"
+    },
+    {
+      "type": "image_picker",
+      "id": "tab_5_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "tab_5_content_title",
+      "label": "Content title"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_5_description",
+      "label": "Description"
+    },
+    {
+      "type": "checkbox",
+      "id": "tab_5_accordion_1_enabled",
+      "label": "Enable accordion 1",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "tab_5_accordion_1_title",
+      "label": "Accordion 1 title"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_5_accordion_1_content",
+      "label": "Accordion 1 content"
+    },
+    {
+      "type": "checkbox",
+      "id": "tab_5_accordion_2_enabled",
+      "label": "Enable accordion 2",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "tab_5_accordion_2_title",
+      "label": "Accordion 2 title"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_5_accordion_2_content",
+      "label": "Accordion 2 content"
+    },
+    {
+      "type": "checkbox",
+      "id": "tab_5_accordion_3_enabled",
+      "label": "Enable accordion 3",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "tab_5_accordion_3_title",
+      "label": "Accordion 3 title"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_5_accordion_3_content",
+      "label": "Accordion 3 content"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product tabs"
+    }
+  ]
+}
+{% endschema %}
